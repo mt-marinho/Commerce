@@ -1,7 +1,6 @@
 import type { ProductDTO } from "../../models/product";
 import ProductCategory from "../ProductCategory";
 import "./styles.css";
-import computer from "../../assets/computer.png"
 
 type Props = {
   product: ProductDTO;
@@ -11,7 +10,7 @@ export default function ProductDetailsCard({ product }: Props) {
   return (
     <div className="dsc-card dsc-mb20">
       <div className="dsc-product-details-top dsc-line-bottom">
-        <img src={computer} alt={product.name} />
+        <img src={product.imgUrl} alt={product.name} />
       </div>
       <div className="dsc-product-details-bottom">
         <h3>R$ {product.price}</h3>

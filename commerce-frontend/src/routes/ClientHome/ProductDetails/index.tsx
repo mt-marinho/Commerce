@@ -1,43 +1,26 @@
+import { Link, useParams } from "react-router-dom";
 import ButtonInverse from "../../../components/ButtonInverse";
 import ButtonPrimary from "../../../components/ButtonPrimary";
 import ProductDetailsCard from "../../../components/ProductDetailsCard";
-import type { ProductDTO } from "../../../models/product";
-import './styles.css';
+import * as productService from "../../../services/product-service";
+import "./styles.css";
 
-const product: ProductDTO = {
-  id: 2,
-  name: "TV",
-  description: "tv de 55 polegadas",
-  price: 2000,
-  imgUrl: "https://cdncentric.adsomos.com.br/image/cache/data/Produtos/SM/Smart-TV-LED-UHD-4K-55-Polegadas-Preta-55AU7700-Samsung-COR-NO-DEFINIDA-8F3A70DE-1-1400x1400.jpg.webp",
-  categories: [
-    {
-      id: 2,
-      name: "Eletronicos"
-    },
-    {
-      id: 3,
-      name: "Computadores"
-    },
-    {
-      id: 4,
-      name: "Importado"
-    }
-  ]
-}
-
-export default function ProductDetails(){
-    return (
-            <>
-              <main>
-                <section id="product-details-section" className="dsc-container">
-                  <ProductDetailsCard product={product}/>
-                  <div className="dsc-btn-page-container">
-                    <ButtonPrimary name="Comprar"/>
-                    <ButtonInverse name="início"/>
-                  </div>
-                </section>
-              </main>
-            </>
-    );
+export default function ProductDetails() {
+  let params = useParams();
+  const product = productService.findById(Number(params.productId));
+  return (
+    <>
+      <main>
+        <section id="product-details-section" className="dsc-container">
+          {product && <ProductDetailsCard product={product} />}
+          <div className="dsc-btn-page-container">
+            <ButtonPrimary name="Comprar" />
+            <Link to="/">
+              <ButtonInverse name="início" />
+            </Link>
+          </div>
+        </section>
+      </main>
+    </>
+  );
 }

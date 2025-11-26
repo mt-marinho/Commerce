@@ -1,4 +1,6 @@
 export type catalogDTO = {
+    id: number,
     price : number,
-    name: string
+    name: string,
+    imgUrl: string
 }
